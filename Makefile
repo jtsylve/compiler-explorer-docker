@@ -1,5 +1,7 @@
 all: build
 
+TAG := $(shell git describe --abbrev=0 2>/dev/null || echo untagged)
+
 help:
 	@echo ""
 	@echo "-- Help Menu"
@@ -11,13 +13,13 @@ help:
 	@echo "   5. make purge        - stop and remove the container"
 
 build:
-	@docker build --tag=jtsylve/compiler-explorer:$(shell git describe --abbrev=0 2>/dev/null || echo untagged) .
+	@docker build --tag=jtsylve/compiler-explorer:$(TAG) .
 
 start:
 	@echo "Starting Compiler Explorer container..."
 	@docker start compiler-explorer 2>/dev/null || \
 	    docker run --name=compiler-explorer -p 10240:10240 -d \
-		    jtsylve/compiler-explorer:latest >/dev/null
+		    jtsylve/compiler-explorer:$(TAG) >/dev/null
 	@echo "Please be patient. This could take a while if new dependencies are needed..."
 	@echo "Compiler Explorer will be available at http://localhost:10240"
 	@echo "Type 'make logs' for the logs"
