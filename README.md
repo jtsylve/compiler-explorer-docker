@@ -2,7 +2,7 @@
 
 Dockerfile to build a [Compiler Explorer](https://github.com/mattgodbolt/compiler-explorer) image for the [Docker](https://www.docker.com/products/docker-engine) open source container platform.
 
-I created this image so that I could use Compiler Explorer without sending proprietary code to a 3rd party.  If you don't have this restriction then you should probably just use [godbolt.org](https://godbolt.org/).  In order to keep the image as small as possible, it only includes the compilers that I use in my development environment.  I have no plans to older versions or compilers that I do not use.
+I created this image so that I could use Compiler Explorer without sending proprietary code to a 3rd party.  If you don't have this restriction then you should probably just use [godbolt.org](https://godbolt.org/).  In order to keep the image as small as possible, it only includes the compilers that I use in my development environment.  I have no plans to add older versions or compilers that I do not use.
 
 ## Current Compilers
 
