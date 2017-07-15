@@ -2,8 +2,9 @@ FROM ubuntu
 LABEL maintainer "joe.sylve@gmail.com"
 
 # Update and install packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
+        ca-certificates \
         xz-utils \
         git \
         build-essential \
