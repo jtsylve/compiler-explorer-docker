@@ -5,8 +5,8 @@ LABEL maintainer "joe.sylve@gmail.com"
 RUN apt-get update && apt-get install -y \
         curl \
         xz-utils \
-        npm \
         git \
+        build-essential \
     && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
@@ -18,15 +18,23 @@ RUN curl -sL https://s3.amazonaws.com/compiler-explorer/opt/gcc-7.1.0.tar.xz | t
     curl -sL https://s3.amazonaws.com/compiler-explorer/opt/clang-4.0.0.tar.xz | tar Jxf -
 
 # Create user and create working directories 
-RUN useradd ceuser && \
-    mkdir -p /home/ceuser /opt/compiler-explorer && \
-    chown ceuser /home/ceuser /opt/compiler-explorer
+RUN useradd -m ceuser && \
+    mkdir -p /opt/compiler-explorer && \
+    chown ceuser /opt/compiler-explorer
+
+USER ceuser
+
+# Install node and update npm
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash && \
+    . ~/.profile && \
+    nvm install node && \
+    npm install npm -g
 
 # Do the initial checkout of the source and install prereqs
-USER ceuser
 WORKDIR /opt/compiler-explorer
 RUN git clone --single-branch --branch release \
     https://github.com/mattgodbolt/compiler-explorer.git . && \
+    . ~/.profile && \
     make prereqs
 
 # Copy the config files
