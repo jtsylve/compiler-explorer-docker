@@ -23,7 +23,7 @@
 
 all: build
 
-TAG := $(shell git describe --abbrev=0 2>/dev/null || echo untagged)
+TAG := $(shell git describe 2>/dev/null || echo untagged)
 
 help:
 	@echo ""
