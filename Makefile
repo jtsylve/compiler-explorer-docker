@@ -25,6 +25,16 @@ all: build
 
 TAG := $(shell git describe 2>/dev/null || echo untagged)
 
+# Set default directory to share with docker
+ifndef CE_SHARED_DIR
+CE_SHARED_DIR := $(HOME)/ce_shared
+endif
+
+# If there's a NO_CE_SHARED_DIR envar set, then don't share a directory
+ifndef NO_CE_SHARED_DIR
+__CE_SHARED_DIR_FLAGS := -v $(CE_SHARED_DIR):/shared
+endif
+
 help:
 	@echo ""
 	@echo "-- Help Menu"
@@ -42,6 +52,7 @@ start:
 	@echo "Starting Compiler Explorer container..."
 	@docker start compiler-explorer 2>/dev/null || \
 	    docker run --name=compiler-explorer -p 10240:10240 -d \
+	        $(__CE_SHARED_DIR_FLAGS) \
 		    jtsylve/compiler-explorer:$(TAG) >/dev/null
 	@echo "Please be patient. This could take a while if new dependencies are needed..."
 	@echo "Compiler Explorer will be available at http://localhost:10240"
