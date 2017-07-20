@@ -51,8 +51,8 @@ build:
 start:
 	@echo "Starting Compiler Explorer container..."
 	@docker start compiler-explorer 2>/dev/null || \
-	    docker run --name=compiler-explorer -p 10240:10240 -d \
-	        $(__CE_SHARED_DIR_FLAGS) \
+		docker run --name=compiler-explorer -p 10240:10240 -d \
+			$(__CE_SHARED_DIR_FLAGS) \
 		    jtsylve/compiler-explorer:$(TAG) >/dev/null
 	@echo "Please be patient. This could take a while if new dependencies are needed..."
 	@echo "Compiler Explorer will be available at http://localhost:10240"
