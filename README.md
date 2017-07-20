@@ -34,6 +34,6 @@ On startup, the container will attempt to update Compiler Explorer to the latest
 
 While prototyping, you may wish to allow Compiler Explorer to access code that is stored on the host computer.  This is useful for including non-standard library headers and source code from other files, without having to copy and paste the contents into CE.
 
-By default, the Makefile will create a folder called `ce_shared` in your home directory.  The contents of this folder will be mounted at the path `/shared` inside of the Docker container.  Code that is copied or symlinked into the `ce_shared` folder on the host can be included in Compiler Explorer by adding a `-I/shared/` flag to the compiler options.
+By default, the Makefile will create a folder called `ce_shared` in your home directory.  The contents of this folder will be mounted at the path `/shared` inside of the Docker container.  Code that is copied or linked into the `ce_shared` folder on the host can be included in Compiler Explorer by adding a `-I/shared/` flag to the compiler options.  Docker for Mac currently does not seem to support following symlinks when mounting directories (see: [docker/for-mac#1298](https://github.com/docker/for-mac/issues/1298)), so you may prefer to use hard links.
 
 The path to the shared folder on the host can be configured by setting a `CE_SHARED_DIR` environment variable when running `make start` for the first time.  Similarly, folder sharing can be disabled entirely by setting a `NO_CE_SHARED_DIR` environment variable when running `make start` for the first time.
