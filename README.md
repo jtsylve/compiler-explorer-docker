@@ -29,3 +29,11 @@ make purge        - stop and remove the container
 ```
 
 On startup, the container will attempt to update Compiler Explorer to the latest release before starting the service.  Once the service is started, Compiler Explorer will be accessible at `http://localhost:10420`.  If you don't have an internet connection, it may take a few minutes for the update check to timeout and the service to start.
+
+## Accessing Code from the Host
+
+While prototyping, you may wish to allow Compiler Explorer to access code that is stored on the host computer.  This is useful for including non-standard library headers and source code from other files, without having to copy and paste the contents into CE.
+
+By default, the Makefile will create a folder called `ce_shared` in your home directory.  The contents of this folder will be mounted at the path `/shared` inside of the Docker container.  Code that is copied or symlinked into the `ce_shared` folder on the host can be included in Compiler Explorer by adding a `-I/shared/` flag to the compiler options.
+
+The path to the shared folder on the host can be configured by setting a `CE_SHARED_DIR` environment variable when running `make start` for the first time.  Similarly, folder sharing can be disabled entirely by setting a `NO_CE_SHARED_DIR` environment variable when running `make start` for the first time.
