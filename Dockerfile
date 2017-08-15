@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Download and unpack compilers
 RUN mkdir -p /opt/compilers
 WORKDIR /opt/compilers
-RUN curl -sL https://s3.amazonaws.com/compiler-explorer/opt/gcc-7.1.0.tar.xz | tar Jxf - && \
+RUN curl -sL https://s3.amazonaws.com/compiler-explorer/opt/gcc-7.2.0.tar.xz | tar Jxf - && \
     curl -sL https://s3.amazonaws.com/compiler-explorer/opt/clang-4.0.0.tar.xz | tar Jxf -
 
 # Create user and create working directories 
