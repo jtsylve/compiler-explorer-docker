@@ -28,7 +28,7 @@ USER ceuser
 # Install node and update npm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash && \
     . ~/.profile && \
-    nvm install node && \
+    nvm install 8 && \
     npm install npm -g
 
 # Do the initial checkout of the source and install prereqs
