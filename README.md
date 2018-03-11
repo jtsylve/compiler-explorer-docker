@@ -8,7 +8,7 @@ I created this image so that I could use Compiler Explorer without sending propr
 
 Currently the image contains 64-bit versions of the following compilers:
  - gcc 7.3.0
- - clang 5.0.0
+ - clang 6.0.0
 
 # Installation
 
